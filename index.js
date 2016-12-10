@@ -12,11 +12,13 @@ program
         if (!file) file = './input.txt';
         day = parseInt(day);
         challenge = parseInt(challenge);
-        if (isNaN(day) || isNaN(challenge)) return console.log('Invalid value provided for <day> or <challenge>')
+        if (isNaN(day) || isNaN(challenge)) return console.log('Invalid value provided for <day> or <challenge>');
+        console.time('Solution time');
         console.log(`Solving challenge ${day}.${challenge} from input file ${file}`);
         fs.readFile(file, 'utf8', (err, data) => {
             if (err) throw err;
             console.log('Solution:', require(`./challenges/day${day}.js`)(data, challenge))
+            console.timeEnd('Solution time')
         })
     })
     .parse(process.argv);
