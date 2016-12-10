@@ -15,14 +15,9 @@ function solve(input, challenge) {
             for (let z = 0; z < i.substring(1); z++) {
                 x += dir[facing].x;
                 y += dir[facing].y;
-                var loc = x + ',' + y;
-                if (locations.indexOf(loc) > -1) duplicate = {x: x, y: y};
-                else locations.push(loc)
+                locations.indexOf(`${x},${y}`) > -1 ? duplicate = {x: x, y: y} : locations.push(`${x},${y}`);
             }
-        } else {
-            x += dir[facing].x * i.substring(1);
-            y += dir[facing].y * i.substring(1);
-        }
+        } else x += dir[facing].x * i.substring(1), y += dir[facing].y * i.substring(1);
     });
     return challenge === 1 ? Math.abs(x) + Math.abs(y) : Math.abs(duplicate.x) + Math.abs(duplicate.y);
 }

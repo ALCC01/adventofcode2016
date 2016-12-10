@@ -5,11 +5,7 @@ function solve(input, challenge) {
     var count = 0,
         data = input.split`\n`.map(e => e.split(/ +/g).splice(1, 3).map(s => +s));
     if (challenge === 1) {
-        data.forEach((e) => {
-            if (e[0] + e[1] > e[2] &&
-                e[1] + e[2] > e[0] &&
-                e[0] + e[2] > e[1]) count++;
-        })
+        return data.map((e) => +(e[0] + e[1] > e[2] && e[1] + e[2] > e[0] && e[0] + e[2] > e[1])).reduce((a, e) => a+e)
     } else {
         data.forEach((v, i, a) => {
             if (!(i%3)) {

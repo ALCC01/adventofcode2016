@@ -10,11 +10,6 @@ var dir = {U: {x: 0, y: -1}, D: {x: 0, y: 1}, L: {x: -1, y: 0}, R: {x: 1, y:0}},
     c2 = [2,0];
 
 function solve(input, keypad, coords) {
-    return input.split`\n`.map(line => {
-        return line.split``.reduce((a, c) => {
-            var attempt = [coords[0] + dir[c].y, coords[1] + dir[c].x];
-            if (keypad[attempt[0]] && keypad[attempt[0]][attempt[1]]) coords = attempt;
-            return coords;
-        }, coords);
-    }).map(e => keypad[e[0]][e[1]]).join``
+    let attempt;
+    return input.split`\n`.map(line => line.split``.reduce((a, c) => (attempt = [coords[0] + dir[c].y, coords[1] + dir[c].x], coords = (keypad[attempt[0]] && keypad[attempt[0]][attempt[1]] ? attempt : coords)))).map(e => keypad[e[0]][e[1]]).join``
 }

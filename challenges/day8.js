@@ -7,31 +7,19 @@ function solve(input, challenge) {
         g = [];
     for (let i = 0; i < h; i++) {
         g[i] = [];
-        for (let j = 0; j < w; j++) {
-            g[i][j] = false;
-        }
+        for (let j = 0; j < w; j++) g[i][j] = false;
     }
-    const rect = (x, y) => {
-            for (let i = 0; i < y; i++) {
-                for (let j = 0; j < x; j++) {
-                    g[i][j] = true
-                }
-            }
-        },
+    const rect = (x, y) => { for (let i = 0; i < y; i++) for (let j = 0; j < x; j++) g[i][j] = true },
         rotate_col = (x, a) => {
             while (a--) {
                 let c = g[h-1][x];
-                for (let i = h-1; i >= 0; i--) {
-                    g[i][x] = i > 0 ? g[i-1][x] : c ;
-                }
+                for (let i = h-1; i >= 0; i--) g[i][x] = i > 0 ? g[i-1][x] : c;
             }
         },
         rotate_row = (y, a) => {
             while (a--) {
                 let c = g[y][w-1];
-                for (let i = w-1; i >= 0; i--) {
-                    g[y][i] = i > 0 ? g[y][i-1] : c ;
-                }
+                for (let i = w-1; i >= 0; i--) g[y][i] = i > 0 ? g[y][i-1] : c;
             }
         },
         show_grid = () => g.map(e => e.map(f => f ? '#' : '.').join` `).join`\n`;
@@ -44,11 +32,6 @@ function solve(input, challenge) {
             if (e[1] == 'row') rotate_row(+e[2].slice(e[2].indexOf('=') +1), +e[4]);
         });
 
-    if (challenge === 1) {
-        return g.reduce((a, b) => a.concat(b), [])
-            .filter(e => e)
-            .length
-    } else {
-        return '\n' + show_grid();
-    }
+    if (challenge === 1) return g.reduce((a, b) => a.concat(b), []).filter(e => e).length;
+    else return '\n' + show_grid();
 }
